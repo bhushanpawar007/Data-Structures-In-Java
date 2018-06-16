@@ -96,7 +96,6 @@ public class Stack {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Stack Initiated !!");
-		System.out.println("Filling array with the default values");
 		Stack s = new Stack(10);
 		s.displayStack();
 		System.out.println(s.push("7"));
