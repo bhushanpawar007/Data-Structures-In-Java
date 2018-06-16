@@ -44,6 +44,7 @@ public class Stack {
 
 		} else {
 			toPop = StackData[topOfStack];
+			StackData[topOfStack]="-1";
 			topOfStack--;
 			return "poped the Element " + toPop + " from location :" + (topOfStack+1);
 
@@ -73,7 +74,7 @@ public class Stack {
 	public void popAll() {
 
 		
-		for(int i=0;i<=topOfStack;i++) {
+		for(int i=topOfStack;i>=0;i--) {
 			System.out.println(pop());
 		}
 		
@@ -111,6 +112,7 @@ public class Stack {
 		System.out.println("Single push and pop donee ..Now executing mutiple push and pop");
 		s.pushMultiple("1 2 3 4 5 6 7");
 		s.displayStack();
+		System.out.println("The yop of the stack value aftermultiple pushe is : "+ s.topOfStack);
 		s.popAll();
 		s.displayStack();
 
