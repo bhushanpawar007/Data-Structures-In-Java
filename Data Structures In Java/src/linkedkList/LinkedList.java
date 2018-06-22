@@ -25,6 +25,7 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 
 	}
 
+	@Override
 	public void addFirst(E obj) {
 		System.out.println("Inside of Add First Method");
 		Node<E> newNode = new Node<E>(obj);
@@ -33,6 +34,7 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 		currentSize++;
 	}
 
+	@Override
 	public void addLast(E obj) {
 		System.out.println("Inside of Add Last Method");
 		Node<E> newNode = new Node<E>(obj);
@@ -57,6 +59,7 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 
 	}
 
+	@Override
 	public void displayList() {
 
 		System.out.println("Printing the List data : ");
@@ -69,36 +72,37 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 
 	}
 
-	public void removeFirst(E obj) {
-		// TODO Auto-generated method stub
+	@Override
+	public E removeFirst() {
+		E temp = head.data;
+		if (head == null) {
+			System.out.println("List is empty");
+			return null;
+		} else {
 
-	}
-
-	public void removeLast(E obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void removeAndFind(E obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void removePeek(E obj) {
-		// TODO Auto-generated method stub
+			head = head.next; // The first element will not have any reference so it will automatically be
+								// garbage collected
+			currentSize--;
+			return temp;
+		}
 
 	}
 
 	@Override
-	public void removeFirst() {
-		// TODO Auto-generated method stub
+	public E removeLast() {
+		if (head == null) {
+			return null;
+		}
+		Node<E> current = head, previous = null;
 
-	}
+		while (current.next != null) {
 
-	@Override
-	public void removeLast() {
-		// TODO Auto-generated method stub
-
+			previous = current;
+			current = current.next;
+		}
+		previous.next = null;
+		currentSize--;
+		return current.data;
 	}
 
 	@Override
@@ -122,6 +126,10 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 		list.addLast(1);
 		list.addLast(2);
 		list.addLast(3);
+		System.out.println("After adding all the elements ...List will look like this ");
+		list.displayList();
+		list.removeLast();
+		System.out.println("After removing the first element ..List will look like this ");
 		list.displayList();
 
 	}

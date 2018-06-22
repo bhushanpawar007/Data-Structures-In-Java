@@ -8,6 +8,13 @@ package linkedkList;
  * @param <E>
  *
  */
+
+/*
+ * Boundry conditions 1.Empty List 2.Single Element 3.beginning Of List 4.End Of
+ * list 5.Middle of list
+ * 
+ * 
+ */
 public interface BhushanLnkliistInterface<E> {
 
 	/*
@@ -33,15 +40,29 @@ public interface BhushanLnkliistInterface<E> {
 	 */
 	public void addLast(E obj);
 
-	public void removeFirst();
+	/*
+	 * This method removes from the head Algorithm : 1. Check if the list is empty
+	 * if yes then just return null don't do anything 2.But if not then Store the
+	 * data object in temp variable and increment head pointer (it will cover one
+	 * element case as well) but if we have tail pointer then we have to make tail
+	 * null explicitly for one element list
+	 */
+	public E removeFirst();
 
-	public void removeLast();
+	/*
+	 * Have to traverse till the last node
+	 * Use to pointers Previous and current where previous will be null first and current will point to first element 
+	 * then traverse till end and then just set previous next to null 
+	 *if empty list ruturn null 
+	 * if only one element then just call removeFirst method 
+	 * else traverse and then assign previous->next to null
+	 */
+	public E removeLast();
 
 	public void removeAndFind();
 
 	public void removePeek();
-	
-	public void displayList() ;
 
+	public void displayList();
 
 }
