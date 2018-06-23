@@ -1,5 +1,8 @@
 package linkedkList;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 
 	@SuppressWarnings("hiding")
@@ -22,6 +25,32 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 	public LinkedList() {
 		head = null;
 		currentSize = 0;
+
+	}
+
+	class IteratorHelper<E> implements Iterator<E> {
+
+		LinkedList<E>.Node<E> index;
+
+		public IteratorHelper() {
+
+			index = (LinkedList<E>.Node<E>) head;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return (index != null);
+		}
+
+		@Override
+		public E next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException("List ended !!");
+			}
+			E val = index.data;
+			index = index.next;
+			return val;
+		}
 
 	}
 
@@ -63,16 +92,18 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 	public void displayList() {
 
 		System.out.println("Printing the List data : ");
-		Node<E> temp = head;
-		if(head==null) {
-			System.out.println("List is empty");
-			return;
+		/*
+		 * Node<E> temp = head; if (head == null) { System.out.println("List is empty");
+		 * return; } while (temp.next != null) { System.out.println("Data Element : " +
+		 * temp.data); temp = temp.next; } System.out.println("Data Element : " +
+		 * temp.data); // printing the last elemnt
+		 */
+
+		IteratorHelper<E> iter = new IteratorHelper<>();
+		while (iter.hasNext()) {
+			System.out.println(iter.next());
+
 		}
-		while (temp.next != null) {
-			System.out.println("Data Element : " + temp.data);
-			temp = temp.next;
-		}
-		System.out.println("Data Element : " + temp.data); // printing the last elemnt
 
 	}
 
@@ -107,25 +138,35 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 		previous.next = null;
 		currentSize--;
 		return current.data;
+		
+	
+		
+		
 	}
 
 	@Override
 	public E remove(E obj) {
 
 		if (head == null) {
+			System.out.println("List is Empty");
 			return null;
 		}
 		Node<E> current = head, previous = null;
 		while (current != null) {
 
-			if (current.data.equals(obj)) {
-				if(previous!=null) {
-				previous.next = current.next;   //if there are more than one element in the list  
-				current.next=null;
-				return current.data; 
+			if ((current.data).equals(obj)) {
+				if (current == head && current.next == null) {
+					head = null;
+					return current.data; // if its the first element
 				}
-				head=null;
-				return current.data;  //if its the first element 
+				if (current == head) {
+					head = head.next;
+					return current.data; // if its the first element
+				}
+				previous.next = current.next; // if there are more than one element in the list
+				current.next = null;
+				return current.data;
+
 			}
 
 			previous = current;
@@ -154,9 +195,11 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 		list.addLast(3);
 		System.out.println("After adding all the elements ...List will look like this ");
 		list.displayList();
-		list.remove(new Integer(2));
-		list.remove(new Integer(1));
-		list.remove(new Integer(3));
+		// System.out.println("Removed this item from list : " + list.remove(new
+		// Integer(2)));
+		// System.out.println("Removed this item from list : " + list.remove(new
+		// Integer(1)));
+		System.out.println("Removed this item from list : " + list.remove(new Integer(3)));
 		System.out.println("After removing the first element ..List will look like this ");
 		list.displayList();
 
