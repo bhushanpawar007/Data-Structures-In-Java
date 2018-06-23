@@ -64,6 +64,10 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 
 		System.out.println("Printing the List data : ");
 		Node<E> temp = head;
+		if(head==null) {
+			System.out.println("List is empty");
+			return;
+		}
 		while (temp.next != null) {
 			System.out.println("Data Element : " + temp.data);
 			temp = temp.next;
@@ -106,8 +110,30 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 	}
 
 	@Override
-	public void removeAndFind() {
-		// TODO Auto-generated method stub
+	public E remove(E obj) {
+
+		if (head == null) {
+			return null;
+		}
+		Node<E> current = head, previous = null;
+		while (current != null) {
+
+			if (current.data.equals(obj)) {
+				if(previous!=null) {
+				previous.next = current.next;   //if there are more than one element in the list  
+				current.next=null;
+				return current.data; 
+				}
+				head=null;
+				return current.data;  //if its the first element 
+			}
+
+			previous = current;
+			current = current.next;
+
+		}
+
+		return obj;
 
 	}
 
@@ -128,7 +154,9 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 		list.addLast(3);
 		System.out.println("After adding all the elements ...List will look like this ");
 		list.displayList();
-		list.removeLast();
+		list.remove(new Integer(2));
+		list.remove(new Integer(1));
+		list.remove(new Integer(3));
 		System.out.println("After removing the first element ..List will look like this ");
 		list.displayList();
 

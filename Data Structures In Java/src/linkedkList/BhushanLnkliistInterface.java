@@ -50,16 +50,29 @@ public interface BhushanLnkliistInterface<E> {
 	public E removeFirst();
 
 	/*
-	 * Have to traverse till the last node
-	 * Use to pointers Previous and current where previous will be null first and current will point to first element 
-	 * then traverse till end and then just set previous next to null 
-	 *if empty list ruturn null 
-	 * if only one element then just call removeFirst method 
-	 * else traverse and then assign previous->next to null
+	 * Have to traverse till the last node Use to pointers Previous and current
+	 * where previous will be null first and current will point to first element
+	 * then traverse till end and then just set previous next to null if empty list
+	 * ruturn null if only one element then just call removeFirst method else
+	 * traverse and then assign previous->next to null
 	 */
 	public E removeLast();
 
-	public void removeAndFind();
+	/*
+	 * This function will find the given element and will remove from list if its
+	 * there We Will be using compareTo method from comparable class and whoever is
+	 * using our data structure has to override this compare to method for their use
+	 * otherwise they will end up comparing the references of elements and will get
+	 * wrong results
+	 * 
+	 * Algorithm: First find the element using previous and current traversing
+	 * method like removeLast method and then make its next point to next->next so
+	 * its next node will be garbage collected as no reference will be pointing to
+	 * it
+	 * If we have single element list/Any list and the element to remove is first element  then use removeFirst code
+	 * traverse till current is not equal to null and check the node to be removed is there or not (make use of removeFirst and removerLast)
+	 */
+	public E remove(E obj);
 
 	public void removePeek();
 
