@@ -28,10 +28,12 @@ public class LinkedList<E> implements BhushanLnkliistInterface<E> {
 
 	}
 
+	@SuppressWarnings("hiding")
 	class IteratorHelper<E> implements Iterator<E> {
 
 		LinkedList<E>.Node<E> index;
 
+		@SuppressWarnings("unchecked")
 		public IteratorHelper() {
 
 			index = (LinkedList<E>.Node<E>) head;
