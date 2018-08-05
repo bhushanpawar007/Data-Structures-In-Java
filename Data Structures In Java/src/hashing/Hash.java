@@ -50,30 +50,42 @@ public class Hash<K, V> implements HashI<K, V> {
 		numberOfElements = 0;
 
 	}
+
 	public double loadFactor() {
-		return (numberOfElements/tableSize);
+		return (numberOfElements / tableSize);
 	}
-	
-	public boolean addElement(K key ,V value) {
-		if(loadFactor() > maxLoadFactor) {
-			//resize(tableSize *2);
+
+	public boolean addElement(K key, V value) {
+		if (loadFactor() > maxLoadFactor) {
+			// resize(tableSize *2);
 		}
-		
-		HashElement<K, V> NewElement=new HashElement<K, V>(key, value);
-		
-		int hashvalue=key.hashCode();
-		hashvalue=hashvalue & 0x7FFFFF;
-		hashvalue=hashvalue%tableSize;
+
+		HashElement<K, V> NewElement = new HashElement<K, V>(key, value);
+
+		int hashvalue = key.hashCode();
+		hashvalue = hashvalue & 0x7FFFFF;
+		hashvalue = hashvalue % tableSize;
 		harray[hashvalue].addFirst(NewElement);
 		numberOfElements++;
 		return true;
-		
-		
+
 	}
+
+	public int hashCode(String s) {
+		int hash = 0;
+		int multiplier = 9;
+		for (int i = 0; i < s.length(); i++) {
+
+			hash = multiplier * hash + s.charAt(i);
+		}
+		return hash;
+
+	}
+
 	public static void main(String[] args) {
 
-		int hashvalue=100;
-		hashvalue=hashvalue & 0x7FFFFFFF;
+		int hashvalue = 100;
+		hashvalue = hashvalue & 0x7FFFFFFF;
 		System.out.println("HashValue is : " + hashvalue);
 	}
 }
