@@ -89,3 +89,4 @@ public class Hash<K, V> implements HashI<K, V> {
 		System.out.println("HashValue is : " + hashvalue);
 	}
 }
+
